@@ -1,20 +1,28 @@
 package com.example.uts_pagisore
-
-import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: MembershipAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
+        recyclerView = findViewById(R.id.recyclerViewMemberships)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        val memberships = listOf(
+            Membership("FAZ CAFE & BALLS", "2022/08/13", R.drawable.logo_faz_cafe),
+            Membership("Syahri's Wash", "2022/07/23", R.drawable.logo_syahris_wash),
+            Membership("Frost Gaming x Pool", "2022/07/13", R.drawable.logo_frost_gaming)
+        )
+
+        adapter = MembershipAdapter(memberships)
+        recyclerView.adapter = adapter
     }
 }
