@@ -1,28 +1,55 @@
 package com.example.uts_pagisore
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: MembershipAdapter
+    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        recyclerView = findViewById(R.id.recyclerViewMemberships)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        bottomNavigationView = findViewById(R.id.bottomNavigation)
 
-        val memberships = listOf(
-            Membership("FAZ CAFE & BALLS", "2022/08/13", R.drawable.logo_faz_cafe),
-            Membership("Syahri's Wash", "2022/07/23", R.drawable.logo_syahris_wash),
-            Membership("Frost Gaming x Pool", "2022/07/13", R.drawable.logo_frost_gaming)
-        )
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    val homeFragment = HomeFragment()
+                    openFragment(homeFragment)
+                    true
+                }
+                R.id.nav_qr -> {
+                    val qrFragment = QrFragment()
+                    openFragment(qrFragment)
+                    true
+                }
+                R.id.nav_messages -> {
+                    val messagesFragment = MessagesFragment()
+                    openFragment(messagesFragment)
+                    true
+                }
+                R.id.nav_profile -> {
+                    val profileFragment = ProfileFragment()
+                    openFragment(profileFragment)
+                    true
+                }
+                else -> false
+            }
+        }
 
-        adapter = MembershipAdapter(memberships)
-        recyclerView.adapter = adapter
+        bottomNavigationView.selectedItemId = R.id.nav_home
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        val fragmentManager: FragmentManager = supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment)
+        fragmentTransaction.commit()
     }
 }
