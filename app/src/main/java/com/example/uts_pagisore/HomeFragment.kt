@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +30,12 @@ class HomeFragment : Fragment() {
         // Inisialisasi RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewMemberships)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val buttonMyShop: LinearLayout = view.findViewById(R.id.buttonMyShop)
+
+        buttonMyShop.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_myShopActivity)
+        }
 
         val memberships = listOf(
             Membership("FAZ CAFE & BALLS", "2022/08/13", R.drawable.logo_faz_cafe),

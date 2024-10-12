@@ -30,6 +30,11 @@
             tools:ignore="UnusedAttribute">
         </activity>
 
+        <activity
+            android:name=".MyshopActivity"
+            android:exported="true">
+        </activity>
+
     </application>
 
 </manifest>

@@ -17,10 +17,28 @@
             app:destination="@id/editProfileFragment" />
     </fragment>
 
-    <!-- Edit Profile Fragment -->
-    <fragment
+    <!-- Edit Profile Activity -->
+    <activity
         android:id="@+id/editProfileFragment"
         android:name="com.example.uts_pagisore.EditProfileActivity"
         android:label="Edit Profile"
         tools:layout="@layout/activity_edit_profile" />
+
+    <!-- Home Fragment -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.uts_pagisore.HomeFragment"
+        android:label="HomeFragment">
+
+        <!-- Action navigasi ke My Shop Activity -->
+        <action
+            android:id="@+id/action_homeFragment_to_myShopActivity"
+            app:destination="@id/myShopActivity" />
+    </fragment>
+
+    <!-- My Shop Activity -->
+    <activity
+        android:id="@+id/myShopActivity"
+        android:name="com.example.uts_pagisore.MyshopActivity"
+        android:label="My Shop" />
 </navigation>
